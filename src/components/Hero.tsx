@@ -28,6 +28,7 @@ const GLYPHS = "!<>-_\\/[]{}—=+*^?#_01";
 
 export const Hero: React.FC<HeroProps> = ({ profile }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const avatarRef = useRef<HTMLDivElement | null>(null);
   const nameRef = useRef<HTMLHeadingElement | null>(null);
   const introRef = useRef<HTMLDivElement | null>(null);
   const titleRef = useRef<HTMLDivElement | null>(null);
@@ -104,11 +105,16 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-      tl.fromTo(introRef.current, { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, delay: 0.1 })
+      tl.fromTo(
+        avatarRef.current,
+        { scale: 0.8, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.8, delay: 0.1, ease: 'back.out(1.4)' }
+      )
+        .fromTo(introRef.current, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.4')
         .fromTo(
           nameRef.current,
-          { y: 35, opacity: 0, scale: 0.96 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.9, clearProps: 'transform,opacity' },
+          { y: 30, opacity: 0, scale: 0.96 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.8, clearProps: 'transform,opacity' },
           '-=0.4'
         )
         .fromTo(
@@ -133,7 +139,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
       // Parallax on scroll
       if (containerRef.current && nameRef.current) {
         gsap.to(nameRef.current, {
-          y: -30,
+          y: -25,
           scrollTrigger: {
             trigger: containerRef.current,
             start: 'top top',
@@ -208,8 +214,31 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
       </div>
 
       {/* Main Centered Cinematic Hero Content */}
-      <div className="container-custom relative z-10 my-auto py-8 flex flex-col items-center justify-center text-center max-w-5xl mx-auto space-y-6">
+      <div className="container-custom relative z-10 my-auto py-6 flex flex-col items-center justify-center text-center max-w-5xl mx-auto space-y-5">
         
+        {/* Developer Profile Portrait Avatar */}
+        <div ref={avatarRef} className="relative group cursor-pointer" data-cursor="ZHAIREL">
+          {/* Outer glowing gradient ring */}
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full p-[3px] bg-gradient-to-tr from-cyan-500 via-emerald-400 to-purple-500 shadow-xl shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all duration-300">
+            <div className="w-full h-full rounded-full overflow-hidden border-2 border-[var(--bg-primary)] bg-slate-900">
+              <img
+                src="/assets/profile.png"
+                alt="Mon Zhairel B. Lingasa"
+                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                loading="eager"
+              />
+            </div>
+          </div>
+
+          {/* Active Status Dot on Avatar */}
+          <div
+            className="absolute bottom-1 right-1 flex items-center justify-center p-1 rounded-full bg-[var(--bg-primary)] shadow-md"
+            title="Available for Software Engineering & Part-Time Opportunities"
+          >
+            <div className="w-4 h-4 rounded-full bg-emerald-500 border-2 border-[var(--bg-primary)] live-pulse" />
+          </div>
+        </div>
+
         {/* Status & Availability Badges Above Name */}
         <div ref={introRef} className="flex flex-wrap items-center justify-center gap-2.5">
           {/* Key Availability Status Badge */}
@@ -236,7 +265,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
         </h1>
 
         {/* Modern Cyberpunk Terminal Scramble Role Ticker */}
-        <div ref={titleRef} className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+        <div ref={titleRef} className="w-full flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 shadow-xs">
             <span className="w-2 h-2 rounded-full bg-cyan-500 live-pulse" />
             <span>ROLE {String(currentRoleIndex + 1).padStart(2, '0')} / {String(rolesList.length).padStart(2, '0')}</span>
@@ -273,7 +302,7 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
         </div>
 
         {/* Action CTAs & Contact Channels (Centered) */}
-        <div ref={actionsRef} className="pt-4 flex flex-col items-center gap-4 w-full">
+        <div ref={actionsRef} className="pt-3 flex flex-col items-center gap-4 w-full">
           <div className="flex flex-wrap items-center justify-center gap-3">
             <MagneticButton strength={20}>
               <button
