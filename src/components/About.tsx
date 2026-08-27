@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Icons } from './icons/Icons';
 import { ProfileData } from '../types/portfolio';
+import { DeveloperIdBadge } from './DeveloperIdBadge';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -94,38 +95,45 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* Left Column: Pinned Storytelling Headline */}
+          {/* Left Column: Pinned Storytelling Headline & 3D Animated Developer ID Badge */}
           <div
             ref={headingColRef}
-            className="lg:col-span-5 lg:sticky lg:top-28 space-y-6 text-left"
+            className="lg:col-span-5 lg:sticky lg:top-24 space-y-6 text-left flex flex-col items-center lg:items-start"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider uppercase text-cyan-400 bg-cyan-500/10 border border-cyan-500/20">
-              <Icons.Activity size={13} className="live-pulse" />
-              <span>Story &amp; Background</span>
+            <div className="space-y-4 w-full">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider uppercase text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 border border-cyan-500/20">
+                <Icons.Activity size={13} className="live-pulse" />
+                <span>Story &amp; Background</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary font-heading tracking-tight leading-[1.1]">
+                I build systems that solve real problems.
+              </h2>
+
+              <p className="text-secondary text-sm sm:text-base leading-relaxed">
+                Software engineering isn't just about writing code — it's about solving organizational bottlenecks, simplifying workflows, and delivering dependable software for administrators, teachers, parents, and students.
+              </p>
+
+              <div className="pt-3 border-t border-subtle grid grid-cols-2 gap-4 text-left">
+                <div>
+                  <div className="text-2xl sm:text-3xl font-extrabold font-heading text-primary">6+</div>
+                  <div className="text-xs font-mono text-muted uppercase">Production Systems</div>
+                </div>
+                <div>
+                  <div className="text-2xl sm:text-3xl font-extrabold font-heading text-cyan-600 dark:text-cyan-400">MIT</div>
+                  <div className="text-xs font-mono text-muted uppercase">USeP (Ongoing)</div>
+                </div>
+              </div>
             </div>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-5xl font-extrabold text-primary font-heading tracking-tight leading-[1.1]">
-              I build systems that solve real problems.
-            </h2>
-
-            <p className="text-secondary text-base leading-relaxed">
-              Software engineering isn't just about writing code — it's about solving organizational bottlenecks, simplifying workflows, and delivering reliable software for administrators, teachers, parents, and students.
-            </p>
-
-            <div className="pt-4 border-t border-subtle grid grid-cols-2 gap-4 text-left">
-              <div>
-                <div className="text-2xl sm:text-3xl font-extrabold font-heading text-primary">6+</div>
-                <div className="text-xs font-mono text-muted uppercase">Production Systems</div>
-              </div>
-              <div>
-                <div className="text-2xl sm:text-3xl font-extrabold font-heading text-cyan-400">MIT</div>
-                <div className="text-xs font-mono text-muted uppercase">USeP (Ongoing)</div>
-              </div>
+            {/* 3D Holographic Developer Identity Card */}
+            <div className="w-full flex justify-center lg:justify-start pt-2">
+              <DeveloperIdBadge profile={profile} />
             </div>
           </div>
 
           {/* Right Column: Sequential Narrative Paragraphs */}
-          <div ref={storyListRef} className="lg:col-span-7 space-y-10 text-left">
+          <div ref={storyListRef} className="lg:col-span-7 space-y-8 text-left">
             {storyItems.map((item, idx) => (
               <div
                 key={idx}
@@ -133,7 +141,7 @@ export const About: React.FC<AboutProps> = ({ profile }) => {
                 style={{ willChange: 'transform, opacity' }}
               >
                 <div className="flex items-center justify-between gap-4 mb-3">
-                  <span className="text-xs font-mono font-bold text-cyan-400 tracking-wider">
+                  <span className="text-xs font-mono font-bold text-cyan-600 dark:text-cyan-400 tracking-wider">
                     // {item.num} · {item.tag}
                   </span>
                   <span className="w-2 h-2 rounded-full bg-cyan-400/40 group-hover:bg-cyan-400 transition-colors" />
