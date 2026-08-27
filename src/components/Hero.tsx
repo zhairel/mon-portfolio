@@ -255,12 +255,6 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                   className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-primary)] via-transparent to-transparent opacity-80 pointer-events-none" />
-                <div className="absolute bottom-3 left-3 right-3 text-center">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950/90 border border-subtle text-[10px] font-mono text-cyan-400 font-bold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 live-pulse" />
-                    <span>VERIFIED SOFTWARE ENGINEER</span>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -390,12 +384,6 @@ export const Hero: React.FC<HeroProps> = ({ profile }) => {
                 }}
                 loading="eager"
               />
-
-              {/* Minimalist Verified Telemetry Pill */}
-              <div className="absolute bottom-6 right-0 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-slate-950/85 backdrop-blur-md border border-subtle text-[10px] font-mono text-secondary shadow-lg">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 live-pulse" />
-                <span>VERIFIED SOFTWARE ENGINEER</span>
-              </div>
             </div>
 
           </div>
